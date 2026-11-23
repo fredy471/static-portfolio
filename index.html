@@ -84,39 +84,6 @@
       margin-inline: auto
     }
 
-    #glow {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background: radial-gradient(500px circle at var(--x, 50%) var(--y, 20%), var(--glow), transparent 60%)
-    }
-
-    #bg {
-      position: fixed;
-      inset: -24px;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-      transition: transform 1.4s cubic-bezier(.22, 1, .36, 1)
-    }
-
-    .g {
-      position: absolute;
-      font: 700 clamp(1.1rem, 2.4vw, 1.8rem) ui-monospace, Menlo, Consolas, monospace;
-      color: var(--a);
-      opacity: .13;
-      white-space: nowrap;
-      user-select: none
-    }
-
-    .g.big {
-      font: 800 clamp(5rem, 14vw, 11rem)/1 Manrope, sans-serif;
-      color: transparent;
-      -webkit-text-stroke: 1.5px var(--a);
-      opacity: .1
-    }
-
     header {
       position: sticky;
       top: env(safe-area-inset-top, 0px);
@@ -596,8 +563,6 @@
 </head>
 
 <body>
-  <div id="glow"></div>
-  <div id="bg" aria-hidden="true"></div>
   <header>
     <div class="wrap">
       <a class="logo" href="#top">fredy<i>.</i>dev</a>
@@ -724,9 +689,6 @@
     }), { threshold: .15 });
     $$(".rv").forEach(el => calm ? (el.style.opacity = 1, el.style.transform = "none") : io.observe(el));
 
-    // Halo curseur
-    addEventListener("pointermove", e => { const g = $("#glow").style; g.setProperty("--x", e.clientX + "px"); g.setProperty("--y", e.clientY + "px") }, { passive: true });
-
     // Inclinaison 3D très douce
     $$(".tilt").forEach(c => {
       c.addEventListener("pointermove", e => {
@@ -735,16 +697,6 @@
       });
       c.addEventListener("pointerleave", () => c.style.transform = "");
     });
-
-    // Fond : initiales (F, M, R, A) et symboles de dev qui dérivent lentement
-    const bg = $("#bg"), G = ["F", "</>", "{ }", "M", "=>", "$", "R", "::", "<?php", "A", ";", "[ ]", "F", "fn()"];
-    const pos = [[4, 10], [82, 8], [22, 36], [90, 42], [48, 5], [70, 62], [6, 64], [34, 80], [86, 86], [56, 92], [3, 93], [62, 28], [28, 54], [76, 22]];
-    G.forEach((g, i) => {
-      const e = document.createElement("span"); e.textContent = g; e.className = "g" + (/^[FMRA]$/.test(g) ? " big" : "");
-      e.style.left = pos[i][0] + "%"; e.style.top = pos[i][1] + "%"; bg.appendChild(e);
-      if (!calm) anime({ targets: e, translateY: [0, anime.random(-34, 34)], translateX: [0, anime.random(-22, 22)], rotate: [0, anime.random(-8, 8)], duration: anime.random(7000, 12000), direction: "alternate", loop: true, easing: "easeInOutSine", delay: anime.random(0, 2000) })
-    });
-    addEventListener("pointermove", e => { if (calm) return; bg.style.transform = `translate(${(e.clientX / innerWidth - .5) * -16}px,${(e.clientY / innerHeight - .5) * -16}px)` }, { passive: true });
 
     // Thème
     const root = document.documentElement;
