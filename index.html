@@ -616,7 +616,7 @@
             l’ensemble de leur cycle de développement, du backend au frontend. Je travaille principalement avec Laravel,
             PHP, JavaScript et React, en privilégiant des solutions fiables, performantes et adaptées aux besoins réels.
           </p>
-          <div class="btns"><a class="btn p" href="#projets">Voir mes projets →</a><a class="btn" href="#contact">Me
+          <div class="btns"><a class="btn p" href="#projets">Voir mes projets →</a><a class="btn" href="assets/CV_BEHANZIN_Fredy_Developpeur_Web_Junior.pdf" download="CV_BEHANZIN_Fredy_Developpeur_Web_Junior.pdf">Télécharger mon CV ↓</a><a class="btn" href="#contact">Me
               contacter</a></div>
         </div>
         <figure class="pic">
@@ -693,18 +693,18 @@
       github: "https://github.com/fredy471",
       site: "https://fredybehanzin.com",
       linkedin: "#",   // colle ici ton URL LinkedIn
-      cv: "https://docs.google.com/document/d/1FS24mwV9bO-LCxsRyHwbziwOKFSlOz9ZqINHXu1UCcM",
+      cv: "assets/CV_BEHANZIN_Fredy_Developpeur_Web_Junior.pdf",
       whatsapp: "2290153540323"
     };
     function wa(t) { return "https://wa.me/" + CFG.whatsapp + "?text=" + encodeURIComponent(t) }
     const STACK = [["Laravel", "Back-end PHP"], ["MySQL", "Base de données"], ["Tailwind CSS", "Utility-first"], ["Bootstrap", "UI framework"], ["React.js", "Front-end"], ["Alpine.js", "Interactions légères"]];
-    const LINKS = [["GitHub", "github.com/fredy471", CFG.github], ["Site web", "fredybehanzin.com", CFG.site], ["LinkedIn", "Profil professionnel", CFG.linkedin], ["CV", "Voir mon CV", CFG.cv], ["WhatsApp", "+229 01 53 54 03 23", wa("Bonjour Fredy, j’ai vu ton portfolio et je souhaiterais échanger avec toi.")], ["E-mail", CFG.email, "mailto:" + CFG.email]];
+    const LINKS = [["GitHub", "github.com/fredy471", CFG.github], ["Site web", "fredybehanzin.com", CFG.site], ["LinkedIn", "Profil professionnel", CFG.linkedin], ["CV", "Télécharger mon CV (PDF)", CFG.cv], ["WhatsApp", "+229 01 53 54 03 23", wa("Bonjour Fredy, j’ai vu ton portfolio et je souhaiterais échanger avec toi.")], ["E-mail", CFG.email, "mailto:" + CFG.email]];
 
     const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
     const calm = matchMedia("(prefers-reduced-motion:reduce)").matches;
     $("#y").textContent = new Date().getFullYear();
     $("#chips").innerHTML = STACK.map(([n, d]) => `<div class="chip">${n}<small>${d}</small></div>`).join("");
-    $("#links").innerHTML = LINKS.map(([n, d, h]) => `<a href="${h}" ${h.startsWith("http") ? 'target="_blank" rel="noopener"' : ""}><b>${n}</b><em>${d} ↗</em></a>`).join("");
+    $("#links").innerHTML = LINKS.map(([n, d, h]) => `<a href="${h}" ${h.startsWith("http") ? 'target="_blank" rel="noopener"' : h.endsWith(".pdf") ? "download" : ""}><b>${n}</b><em>${d} ${h.endsWith(".pdf") ? "↓" : "↗"}</em></a>`).join("");
     $$("[data-demo]").forEach(a => a.href = wa(`Bonjour Fredy, j’ai vu ton portfolio et je souhaiterais une démo du projet ${a.dataset.demo}.`));
 
     // Hero : titre mot par mot (paragraphe fixe)
